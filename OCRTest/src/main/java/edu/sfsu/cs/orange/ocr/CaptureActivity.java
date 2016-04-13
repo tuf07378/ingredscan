@@ -74,6 +74,8 @@ import edu.sfsu.cs.orange.ocr.language.TranslateAsyncTask;
  * 
  * The code for this class was adapted from the ZXing project: http://code.google.com/p/zxing/
  */
+
+//COMMIT TEST
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback, 
   ShutterButton.OnShutterButtonListener {
 
