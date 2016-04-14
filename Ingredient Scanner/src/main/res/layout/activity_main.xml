@@ -13,25 +13,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="HELLO WORLD"
+        android:text="Welcome to Aia! Aia stands for Am I Allergic? This application scans ingredient lists and determines which ingredients do not constrain to your dietary requirements."
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_above="@+id/capture_activity_button"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center"
+        android:enabled="true"
+        android:textStyle="normal"
+        android:gravity="center" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CamTime"
+        android:text="Open Camera"
         android:id="@+id/capture_activity_button"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="66dp" />
+        android:layout_above="@+id/settings_button"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings"
         android:id="@+id/settings_button"
-        android:layout_below="@+id/capture_activity_button"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+        android:layout_above="@+id/capture_activity_button"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="129dp" />
 </RelativeLayout>
