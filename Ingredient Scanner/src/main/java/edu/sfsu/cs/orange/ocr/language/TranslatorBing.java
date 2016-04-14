@@ -22,6 +22,8 @@ import com.memetix.mst.translate.Translate;
 
 import edu.sfsu.cs.orange.ocr.CaptureActivity;
 
+
+//test commit
 public class TranslatorBing {
   private static final String TAG = TranslatorBing.class.getSimpleName();
   private static final String CLIENT_ID = " [PUT YOUR CLIENT ID HERE] ";
