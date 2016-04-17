@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "edu.sfsu.cs.orange.ocr"
-        minSdkVersion 18
+        minSdkVersion 16   //18 was the version here prior to 4/17/16. I changed this value so that it works on my Tablet. - Vlad.
         targetSdkVersion 23
     }
     buildTypes {
