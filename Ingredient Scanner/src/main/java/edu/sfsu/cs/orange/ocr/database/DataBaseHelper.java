@@ -6,7 +6,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -160,7 +159,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     // to you to create adapters for your views.
 
 
-
+    //Returns our database of food as a List<Food>
     public List<Food> getListFood() {
 
         System.out.println("HERE 1");
@@ -181,18 +180,89 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return foodList;
     }
 
+      //Makes a string list of all the food items from our Database, separated by ", " (comma and space)
     public String makefoodListString() {
 
         List<Food> foodList;
         foodList = getListFood();
         String foodString = "";
         for(int i = 0; i < foodList.size(); i++)
-            foodString += foodList.get(i).getName() + " ";
+            foodString +=  foodList.get(i).getName() + ", ";
 
-        foodString += "sex";
         return foodString;
     }
 
+    //Method to convert a string of ingredients,separated by ", " (comma and space) to an array
+    public String[] stringtoArray(String s)
+    {
+        String replacedStr = s.replaceAll("\n", " ");
+        return replacedStr.split(", ");
+    }
+
+    //Method to convert an array of Strings back to an ingredients list String separated by ", "( comma and space).
+    public String arrayToString(String[] s)
+    {
+       String returnString = "";
+       for(int i = 0; i < s.length; i++)
+            returnString += s[i] + ", ";
+        return returnString;
+    }
+
+    //Takes the OCR input, compares it with our foodList, and returns a String array of ingredients found.
+    public String foodFoundList(String ocrText)
+    {
+        String foodNotFoundList = "Ingredients found: ";
+        String [] ocrArray;
+        ocrArray = stringtoArray(ocrText);
+        String foodList = makefoodListString();
+        for(int i = 0; i < ocrArray.length; i++)
+        {
+            if((foodList.toLowerCase().contains(ocrArray[i].toLowerCase())))
+                foodNotFoundList += ocrArray[i] + ", ";
+        }
+        return foodNotFoundList;
+    }
+
+    //Takes the OCR input, compares it with our foodList, and returns a list of ingredients not found
+    public String foodNotFoundList(String ocrText){
+      String foodNotFoundList = "Ingredients not found: ";
+      String [] ocrArray;
+      ocrArray = stringtoArray(ocrText);
+      String foodList = makefoodListString();
+      for(int i = 0; i < ocrArray.length; i++)
+      {
+        if(!(foodList.toLowerCase().contains(ocrArray[i].toLowerCase())))
+            foodNotFoundList += ocrArray[i] + ", ";
+      }
+      return foodNotFoundList;
+    }
+
+
+    //THE KING METHOD
+    //This method will give us our results info: Each ingredient and the allergens it contains, based on the user's input.
+    public String resultsInfo(String ocrText, String[] allergens)
+    {
+        String returnString = "";
+        List<Food> foodList;
+        foodList = getListFood();
+        for(int i = 0; i < foodList.size(); i++)
+        {
+            if(ocrText.toLowerCase().contains(foodList.get(i).getName().toLowerCase()))
+            {
+                for(int j = 0; j < allergens.length; j++)
+                {
+                    if(foodList.get(i).getTags().toLowerCase().contains(allergens[j].toLowerCase()))
+                    {
+                        returnString += foodList.get(i).getName() + " contains " + foodList.get(i).getTags() + "\n";
+                        break; //breaks out of the allergens for loop.
+                    }
+                }
+            }
+        }
+        return returnString;
+    }
+
+    //idk what this is for anymore, I think it won't be used.
     public String[] getFoodTags(String [] ingredient) {
 
         List<Food> foodList = new ArrayList<>();
@@ -215,13 +285,15 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return tagList;
     }
 
+    //idk what this is for anymore, I think it won't be used.
     public String makeTagListString(String [] tagList) {
         String tags = "";
         for(int i = 0; i < tagList.length; i++)
             tags += tagList[i];
 
-        tags += "sex";
+
     return tags;
     }
+
 
 }

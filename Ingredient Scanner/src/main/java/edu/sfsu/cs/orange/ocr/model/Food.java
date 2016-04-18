@@ -9,8 +9,8 @@ public class Food {
     private String description;
     private String tags;
 
-    public Food(int id, String tags, String name, String description) {
-        this._id = _id;
+    public Food(int id, String name, String description, String tags) {
+        this._id = id;
         this.tags = tags;
         this.name = name;
         this.description = description;
@@ -21,7 +21,7 @@ public class Food {
     }
 
     public void setId(int id) {
-        this._id = _id;
+        this._id = id;
     }
 
     public String getName() {

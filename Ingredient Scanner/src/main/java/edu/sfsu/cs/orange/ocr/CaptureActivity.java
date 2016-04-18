@@ -823,17 +823,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
 
 
-    String text = ocrResult.getText();
-    String [] resultArray;
-    String resultString;
-    String[] ss= text.split(",");
-
-    //OLD GARBAGE
-    //DataBaseHelper dbh = new DataBaseHelper(this);
-    //dbh.getReadableDatabase();
-
-
-
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
     myDbHelper = new DataBaseHelper(this);
 
@@ -857,13 +846,15 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     }
 
-    resultArray = myDbHelper.getFoodTags(ss);
-    resultString = myDbHelper.makeTagListString(resultArray);
+    String ocrText = ocrResult.getText();
+    String[] allergens = {"Dairy", "Artificial Sweetener", "Carcinogenic"};
+    String mainResultsInfo = myDbHelper.resultsInfo(ocrText, allergens);
+    String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText);
 
-    String foodList = myDbHelper.makefoodListString();
+    String finalResults = "OCR text:\n" + ocrText  + "Main Results: " +   mainResultsInfo + "\n" + ingredientsNotFound;
 
-    /******** Final output text after camera button is hit ************/
-    ocrResultTextView.setText(foodList);
+    /******** Final output text after camera button is hit  ocrResultsTextView.setText(ocrResult.getText())  ************/
+    ocrResultTextView.setText(finalResults);
 
 
     // Crudely scale betweeen 22 and 32 -- bigger font for shorter text
