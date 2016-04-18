@@ -851,7 +851,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     String mainResultsInfo = myDbHelper.resultsInfo(ocrText, allergens);
     String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText);
 
-    String finalResults = "OCR text:\n" + ocrText  + "Main Results: " +   mainResultsInfo + "\n" + ingredientsNotFound;
+    String finalResults = "OCR text:\n" + ocrText  + "\n" + "Main Results: " +   mainResultsInfo + "\n" + ingredientsNotFound;
 
     /******** Final output text after camera button is hit  ocrResultsTextView.setText(ocrResult.getText())  ************/
     ocrResultTextView.setText(finalResults);
