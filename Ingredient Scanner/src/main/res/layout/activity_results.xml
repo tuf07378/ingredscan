@@ -24,39 +24,33 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:lines="2"
-        android:id="@+id/text2"
-        android:clickable="true"
-        android:text="Another TextView"
-        android:autoLink="all"
-        android:fontFamily="Arial"
-        android:typeface="serif"
-        android:textSize="20sp"
-        android:layout_below="@+id/text1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="&quot;Meaty&quot;"
+        android:text="Results text"
         android:id="@+id/results_view"
-        android:layout_below="@+id/text2"
+        android:layout_marginTop="109dp"
+        android:layout_below="@+id/text1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MainTest"
-        android:id="@+id/main_test_view"
+        android:text="Ingredients Not Found"
+        android:id="@+id/ingredients_not_found"
+        android:layout_marginTop="73dp"
         android:layout_below="@+id/results_view"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OCR Text"
+        android:id="@+id/ocr_text"
+        android:layout_below="@+id/text1"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp" />
+        android:layout_marginTop="34dp" />
 
 </RelativeLayout>

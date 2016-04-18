@@ -59,6 +59,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,6 +84,8 @@ import edu.sfsu.cs.orange.ocr.language.TranslateAsyncTask;
  */
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback,
         ShutterButton.OnShutterButtonListener {
+
+  Button resultsActivityButton;
 
   private static final String TAG = CaptureActivity.class.getSimpleName();
 
@@ -279,6 +282,17 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
     setContentView(R.layout.capture);
+
+    resultsActivityButton = (Button)findViewById(R.id.results_button);
+    resultsActivityButton.setOnClickListener(new View.OnClickListener(){
+
+      @Override
+      public void onClick(View v) {
+        Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
+        i.putExtra("ocrText", ocrText);
+        startActivity(i); //sends us to results page!
+      }
+    });
     viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
     cameraButtonView = findViewById(R.id.camera_button_view);
     resultView = findViewById(R.id.result_view);
@@ -465,15 +479,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
    * Called when the shutter button is pressed in continuous mode.
    */
   void onShutterButtonPressContinuous() {
-    Intent intent = new Intent(this, ResultsActivity.class);
     isPaused = true;
     handler.stop();
     beepManager.playBeepSoundAndVibrate();
     if (lastResult != null) {
       handleOcrDecode(lastResult);
-      intent.putExtra("ocrText", ocrText);
-      startActivity(intent);
-
     } else {
       Toast toast = Toast.makeText(this, "OCR failed. Please try again.", Toast.LENGTH_SHORT);
       toast.setGravity(Gravity.TOP, 0, 0);
@@ -855,7 +865,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     ocrText = ocrResult.getText();
 
-    ocrResultTextView.setText("Taking you to the Results :)");
+    ocrResultTextView.setText(ocrText);
 
 
     // Crudely scale betweeen 22 and 32 -- bigger font for shorter text
