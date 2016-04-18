@@ -44,14 +44,14 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Bundle bundle = getIntent().getExtras();
-        String ocrText = bundle.getString("ocrText");
+        //String ocrText = bundle.getString("ocrText");
         String str1= "spaghetti";
         String str2 = "meatballs";
         String str3 = str1 + " and " + str2;
         resultsView = (TextView) findViewById(R.id.results_view);
 
         DataBaseHelper myDbHelper = new DataBaseHelper(this);
-    myDbHelper = new DataBaseHelper(this);
+        myDbHelper = new DataBaseHelper(this);
 
     try {
 
@@ -72,12 +72,12 @@ public class ResultsActivity extends AppCompatActivity {
       throw sqle;
 
     }
-
+    String ocrTextHardcoded = "Milk, splenda, aspartame, sodium nitrate";
     String[] allergens = {"Dairy", "Artificial Sweetener", "Carcinogenic"};
-    String mainResultsInfo = myDbHelper.resultsInfo(ocrText, allergens);
-    String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText);
+    String mainResultsInfo = myDbHelper.resultsInfo(ocrTextHardcoded, allergens);
+    String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrTextHardcoded);
 
-    String finalResults = "OCR text:\n" + ocrText  + "\n" + "Main Results: " +   mainResultsInfo + "\n" + ingredientsNotFound;
+    //String finalResults = "OCR text:\n" + ocrText  + "\n" + "Main Results: " +   mainResultsInfo + "\n" + ingredientsNotFound;
 
         resultsView.setText(mainResultsInfo);
 
