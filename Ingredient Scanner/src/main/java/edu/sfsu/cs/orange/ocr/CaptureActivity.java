@@ -822,28 +822,19 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     TextView ocrResultTextView = (TextView) findViewById(R.id.ocr_result_text_view);
 
 
-
+   /*
     DataBaseHelper myDbHelper = new DataBaseHelper(this);
     myDbHelper = new DataBaseHelper(this);
 
     try {
-
       myDbHelper.createDataBase();
-
     } catch (IOException ioe) {
-
       throw new Error("Unable to create database");
-
     }
-
     try {
-
       myDbHelper.openDataBase();
-
     } catch (SQLException sqle) {
-
       throw sqle;
-
     }
 
     String ocrText = ocrResult.getText();
@@ -853,8 +844,16 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     String finalResults = "OCR text:\n" + ocrText  + "\n" + "Main Results: " +   mainResultsInfo + "\n" + ingredientsNotFound;
 
+    */
+
     /******** Final output text after camera button is hit  ocrResultsTextView.setText(ocrResult.getText())  ************/
-    ocrResultTextView.setText(finalResults);
+
+    String ocrText = ocrResult.getText();
+    Intent intent = new Intent(this, ResultsActivity.class);
+    intent.putExtra("ocrText", ocrText);
+    startActivity(intent);
+
+    ocrResultTextView.setText("hardcoded text");
 
 
     // Crudely scale betweeen 22 and 32 -- bigger font for shorter text
