@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button cameraActivityButton;
     Button settingsActivityButton;
+    Button resultsActivityButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         cameraActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent i = new Intent(getApplicationContext(), CaptureActivity.class);
+                Intent i = new Intent(getApplicationContext(), CaptureActivity.class);
                 startActivity(i); //will send us there
             }
         });
@@ -32,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), PreferencesActivity.class);
                 startActivity(i); //sends us to options!
+            }
+        });
+
+        resultsActivityButton = (Button)findViewById(R.id.results_button_test);
+        resultsActivityButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
+                startActivity(i); //sends us to results test!
             }
         });
     }
