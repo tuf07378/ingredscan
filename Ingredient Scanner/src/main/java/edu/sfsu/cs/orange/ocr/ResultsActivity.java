@@ -61,6 +61,7 @@ public class ResultsActivity extends AppCompatActivity {
         }
 
         //Allergens (hardcoded for now)
+        //fuckin A
         String[] allergens = {"Artificial Additives", "Artificial Sweetener", "Carcinogenic", "Cocoa", "Dairy", "Egg", "Fish",
                 "Meat", "Peanut", "Sesame", "Shellfish", "Soy", "Sweetener", "Trans Fat", "Tree Nut", "Wheat"} ;
         String mainResultsInfo = myDbHelper.resultsInfo(ocrText, allergens);
