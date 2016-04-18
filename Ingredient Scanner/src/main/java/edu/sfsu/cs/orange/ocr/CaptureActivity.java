@@ -246,6 +246,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private boolean isEngineReady;
   private boolean isPaused;
   private static boolean isFirstLaunch; // True if this is the first time the app is being run
+  private String ocrText = "";
   /**
    * ATTENTION: This was auto-generated to implement the App Indexing API.
    * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -464,11 +465,15 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
    * Called when the shutter button is pressed in continuous mode.
    */
   void onShutterButtonPressContinuous() {
+    Intent intent = new Intent(this, ResultsActivity.class);
     isPaused = true;
     handler.stop();
     beepManager.playBeepSoundAndVibrate();
     if (lastResult != null) {
       handleOcrDecode(lastResult);
+      intent.putExtra("ocrText", ocrText);
+      startActivity(intent);
+
     } else {
       Toast toast = Toast.makeText(this, "OCR failed. Please try again.", Toast.LENGTH_SHORT);
       toast.setGravity(Gravity.TOP, 0, 0);
@@ -848,12 +853,9 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     /******** Final output text after camera button is hit  ocrResultsTextView.setText(ocrResult.getText())  ************/
 
-    String ocrText = ocrResult.getText();
-    Intent intent = new Intent(this, ResultsActivity.class);
-    intent.putExtra("ocrText", ocrText);
-    startActivity(intent);
+    ocrText = ocrResult.getText();
 
-    ocrResultTextView.setText("hardcoded text");
+    ocrResultTextView.setText("Taking you to the Results :)");
 
 
     // Crudely scale betweeen 22 and 32 -- bigger font for shorter text

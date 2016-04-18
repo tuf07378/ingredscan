@@ -1,5 +1,6 @@
 package edu.sfsu.cs.orange.ocr;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ public class ResultsActivity extends AppCompatActivity {
 
     private TextView text2;
     private TextView resultsView;
+    private TextView mainView;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,43 +46,38 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Bundle bundle = getIntent().getExtras();
         //String ocrText = bundle.getString("ocrText");
         String str1= "spaghetti";
         String str2 = "meatballs";
         String str3 = str1 + " and " + str2;
         resultsView = (TextView) findViewById(R.id.results_view);
-
+        mainView = (TextView) findViewById(R.id.main_test_view);
+        /*
         DataBaseHelper myDbHelper = new DataBaseHelper(this);
         myDbHelper = new DataBaseHelper(this);
-
-    try {
-
-      myDbHelper.createDataBase();
-
-    } catch (IOException ioe) {
-
-      throw new Error("Unable to create database");
-
-    }
-
-    try {
-
-      myDbHelper.openDataBase();
-
-    } catch (SQLException sqle) {
-
-      throw sqle;
-
-    }
+        try {
+        myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+          throw new Error("Unable to create database");
+        }
+        try {
+          myDbHelper.openDataBase();
+        } catch (SQLException sqle) {
+          throw sqle;
+        }
+        */
     String ocrTextHardcoded = "Milk, splenda, aspartame, sodium nitrate";
     String[] allergens = {"Dairy", "Artificial Sweetener", "Carcinogenic"};
-    String mainResultsInfo = myDbHelper.resultsInfo(ocrTextHardcoded, allergens);
-    String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrTextHardcoded);
+    //String mainResultsInfo = myDbHelper.resultsInfo(ocrTextHardcoded, allergens);
+    //String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrTextHardcoded);
 
     //String finalResults = "OCR text:\n" + ocrText  + "\n" + "Main Results: " +   mainResultsInfo + "\n" + ingredientsNotFound;
+        Intent intent = getIntent();
+        String mainActivityTest = intent.getExtras().getString("mainActivityTest");
+        mainView.setText("main test hardcoded");
 
-        resultsView.setText(mainResultsInfo);
+        String ocrTest = intent.getExtras().getString("ocrText");
+        resultsView.setText(ocrTest);
 
     }
 }

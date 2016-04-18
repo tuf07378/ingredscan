@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String sendTest = "test from main activity";
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cameraActivityButton = (Button)findViewById(R.id.capture_activity_button);
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
+                i.putExtra("mainActivityTest", sendTest);
                 startActivity(i); //sends us to results test!
             }
         });
