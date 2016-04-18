@@ -26,29 +26,16 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-
-        text2 = (TextView) findViewById(R.id.text2);
-
-        text2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Text2 was clicked",
-                        Toast.LENGTH_LONG).show();
-                text2.setText("Visit us: http://examples.javacodegeeks.com");
-
-                if (text2.getLinksClickable() == true) {
-                    text2.setLinkTextColor(Color.BLUE);
-                }
-            }
-
-        });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        String ocrText = intent.getExtras().getString("ocrText");
+        String ocrText = "";
+        if(intent.getExtras() != null) {
+             ocrText = intent.getExtras().getString("ocrText");
+        }
 
         //Initializes our 3 textViews.
         resultsView = (TextView) findViewById(R.id.results_view);
@@ -81,6 +68,7 @@ public class ResultsActivity extends AppCompatActivity {
         //Puts the main ingredient allergen results in the resultsView, and lists the ingredients not found
         resultsView.setText(mainResultsInfo);
         ingredientsNotFoundView.setText(ingredientsNotFound);
+
 
 
 

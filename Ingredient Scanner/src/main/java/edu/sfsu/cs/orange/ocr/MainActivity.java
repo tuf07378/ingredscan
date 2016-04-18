@@ -41,11 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
         resultsActivityButton = (Button)findViewById(R.id.results_button_test);
         resultsActivityButton.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
-                i.putExtra("mainActivityTest", sendTest);
                 startActivity(i); //sends us to results test!
             }
         });
