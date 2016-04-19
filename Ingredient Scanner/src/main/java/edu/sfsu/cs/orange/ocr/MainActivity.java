@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
     Button cameraActivityButton;
     Button settingsActivityButton;
     Button resultsActivityButton;
-    Button helpActivityButton;
+    ImageButton helpActivityButton;
 
 
     @Override
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i); //sends us to results test!
             }
         });
-        helpActivityButton = (Button)findViewById(R.id.help_contents);
+        helpActivityButton = (ImageButton)findViewById(R.id.help_contents);
         helpActivityButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
