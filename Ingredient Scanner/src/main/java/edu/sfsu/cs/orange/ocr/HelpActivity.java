@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.MailTo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,7 +66,11 @@ public final class HelpActivity extends Activity {
     super.onCreate(icicle);
     setContentView(R.layout.help);
 
-    webView = (WebView)findViewById(R.id.help_contents);
+    WebView view = new WebView(this);
+    view.getSettings().setJavaScriptEnabled(true);
+    view.loadUrl("file:///android_asset/help.html");
+    view.setBackgroundColor(Color.TRANSPARENT);
+    setContentView(view);
     webView.setWebViewClient(new HelpClient(this));
 
     Intent intent = getIntent();
