@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     Button cameraActivityButton;
     Button settingsActivityButton;
     Button resultsActivityButton;
+    Button helpActivityButton;
 
 
     @Override
@@ -44,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
+                startActivity(i); //sends us to results test!
+            }
+        });
+        helpActivityButton = (Button)findViewById(R.id.help_contents);
+        helpActivityButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), HelpActivity.class);
                 startActivity(i); //sends us to results test!
             }
         });

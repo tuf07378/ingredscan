@@ -54,4 +54,15 @@
         android:id="@+id/results_button_test"
         android:layout_below="@+id/capture_activity_button"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+        android:src="@drawable/help_button" />
+
 </RelativeLayout>
