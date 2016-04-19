@@ -260,8 +260,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
           {
               if(ocrTextArray[i].toLowerCase().contains( foodList.get(j).getName().toLowerCase()))
               {
-                  returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + "\n";
-                  break;
+                  if(allergyCheck(allergens, foodList.get(j).getTags())) {
+                      returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + "\n";
+                      break;
+                  }
               }
           }
         }
@@ -282,6 +284,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             }
         }*/
         return returnString;
+    }
+
+    public boolean allergyCheck(String[] allergyArray, String tags)
+    {
+        for(int i = 0; i < allergyArray.length; i++)
+        {
+            if(tags.toLowerCase().contains(allergyArray[i].toLowerCase()))
+                return true;
+        }
+        return false;
     }
 
     //idk what this is for anymore, I think it won't be used.
