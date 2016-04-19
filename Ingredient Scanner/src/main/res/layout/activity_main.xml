@@ -62,7 +62,7 @@
         android:id="@+id/help_button"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
         android:src="@drawable/help_button" />
 
 </RelativeLayout>

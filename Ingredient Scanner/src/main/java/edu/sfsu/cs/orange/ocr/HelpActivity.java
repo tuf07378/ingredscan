@@ -66,102 +66,22 @@ public final class HelpActivity extends Activity {
     super.onCreate(icicle);
     setContentView(R.layout.help);
 
-    WebView view = new WebView(this);
-    view.getSettings().setJavaScriptEnabled(true);
-    view.loadUrl("file:///android_asset/help.html");
-    view.setBackgroundColor(Color.TRANSPARENT);
-    setContentView(view);
-    webView.setWebViewClient(new HelpClient(this));
-
-    Intent intent = getIntent();
-    String page = intent.getStringExtra(REQUESTED_PAGE_KEY);
+    WebView webView=(WebView)findViewById(R.id.webView);
+    webView.loadUrl("file:///android_asset/html/help.html");
+    webView.getSettings().setJavaScriptEnabled(true);
+    webView.getSettings().setSaveFormData(true);
+    webView.setWebViewClient(new MyWebViewClient());
 
     // Show an OK button.
     View doneButton = findViewById(R.id.done_button);
     doneButton.setOnClickListener(doneListener);
-
-    if (page.equals(DEFAULT_PAGE)) {
-      doneButton.setVisibility(View.VISIBLE);
-    } else {
-      doneButton.setVisibility(View.GONE);
-    }
-
-    // Froyo has a bug with calling onCreate() twice in a row, which causes the What's New page
-    // that's auto-loaded on first run to appear blank. As a workaround we only call restoreState()
-    // if a valid URL was loaded at the time the previous activity was torn down.
-    if (icicle != null && icicle.getBoolean(WEBVIEW_STATE_PRESENT, false)) {
-      webView.restoreState(icicle);
-    } else if (intent != null && page != null && page.length() > 0) {
-      webView.loadUrl(BASE_URL + page);
-    } else {
-      webView.loadUrl(BASE_URL + DEFAULT_PAGE);
-    }
   }
-
-  @Override
-  protected void onSaveInstanceState(Bundle state) {
-    String url = webView.getUrl();
-    if (url != null && url.length() > 0) {
-      webView.saveState(state);
-      state.putBoolean(WEBVIEW_STATE_PRESENT, true);
-    }
-  }
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (keyCode == KeyEvent.KEYCODE_BACK) {
-      if (webView.canGoBack()) {
-        webView.goBack();
-        return true;
-      }
-    }
-    return super.onKeyDown(keyCode, event);
-  }
-
-  private final class HelpClient extends WebViewClient {
-    Activity context;
-    public HelpClient(Activity context){
-        this.context = context;
-    }
-
-    @Override
-    public void onPageFinished(WebView view, String url) {
-      setTitle(view.getTitle());
-    }
-
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-      if (url.startsWith("file")) {
-        // Keep local assets in this WebView.
-        return false;
-      } else if (url.startsWith("mailto:")) {
-        try {
-              MailTo mt = MailTo.parse(url);
-              Intent i = new Intent(Intent.ACTION_SEND);
-              i.setType("message/rfc822");
-              i.putExtra(Intent.EXTRA_EMAIL, new String[]{mt.getTo()});
-              i.putExtra(Intent.EXTRA_SUBJECT, mt.getSubject());
-              context.startActivity(i);
-              view.reload();
-        }
-        catch (ActivityNotFoundException e) {
-          Log.w(TAG, "Problem with Intent.ACTION_SEND", e);
-                  new AlertDialog.Builder(context)
-                    .setTitle("Contact Info")
-                    .setMessage( "Please send your feedback to: app.ocr@gmail.com" )
-                    .setPositiveButton( "Done", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Log.d("AlertDialog", "Positive");
-                        }
-                    })
-                    .show();
-        }
-            return true;
-      } else {
-        // Open external URLs in Browser.
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-        return true;
-      }
+   private class MyWebViewClient extends WebViewClient {
+     @Override
+      //show the web page in webview but not in web browser
+      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+      view.loadUrl (url);
+      return true;
     }
   }
 }
