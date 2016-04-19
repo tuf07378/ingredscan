@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i); //sends us to results test!
             }
         });
-        helpActivityButton = (ImageButton)findViewById(R.id.help_contents);
+        helpActivityButton = (ImageButton)findViewById(R.id.help_button);
         helpActivityButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
