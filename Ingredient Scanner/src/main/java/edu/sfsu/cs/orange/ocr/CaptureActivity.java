@@ -290,6 +290,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       public void onClick(View v) {
         Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
         i.putExtra("ocrText", ocrText);
+        i.putExtra("food" ,"spaghetti, sauce, meatballs");
         startActivity(i); //sends us to results page!
       }
     });

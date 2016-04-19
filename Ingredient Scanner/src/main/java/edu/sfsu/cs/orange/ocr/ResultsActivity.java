@@ -21,6 +21,8 @@ public class ResultsActivity extends AppCompatActivity {
     private TextView resultsView;
     private TextView ingredientsNotFoundView;
     private TextView ocrTextView;
+    private TextView foodView;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +33,22 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        //Code to get the OCR text from the previous activity.
         Intent intent = getIntent();
-        String ocrText = "";
+        String ocrText, food;
+        ocrText = food = "";
         if(intent.getExtras() != null) {
              ocrText = intent.getExtras().getString("ocrText");
+             food = intent.getExtras().getString("food");
         }
 
         //Initializes our 3 textViews.
         resultsView = (TextView) findViewById(R.id.results_view);
         ingredientsNotFoundView = (TextView) findViewById(R.id.ingredients_not_found);
         ocrTextView= (TextView) findViewById(R.id.ocr_text);
+        foodView= (TextView) findViewById(R.id.meal_view);
+        foodView.setText(food);
 
         //Sets up our first textView, the OCR text.
         ocrTextView.setText("OCR Scan Result:\n" + ocrText);

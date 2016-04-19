@@ -196,7 +196,14 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String[] stringtoArray(String s)
     {
         String replacedStr = s.replaceAll("\n", " ");
-        return replacedStr.split(", ");
+        String[] returnString = replacedStr.split(",");
+        for(int i = 0; i < returnString.length; i++)
+        {
+            while(returnString[i].charAt(0) == ' '){
+                returnString[i] = returnString[i].replaceFirst(" ", "");
+            }
+        }
+        return returnString;
     }
 
     //Method to convert an array of Strings back to an ingredients list String separated by ", "( comma and space).
@@ -243,8 +250,23 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String resultsInfo(String ocrText, String[] allergens)
     {
         String returnString = "";
+        String[] ocrTextArray = stringtoArray(ocrText);
         List<Food> foodList;
-        foodList = getListFood();
+        foodList = getListFood();    //gets the database into a list of Food items.
+
+        for(int i = 0; i <ocrTextArray.length; i++)
+        {
+          for(int j = 0; j < foodList.size(); j++)
+          {
+              if(ocrTextArray[i].toLowerCase().contains( foodList.get(j).getName().toLowerCase()))
+              {
+                  returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + "\n";
+                  break;
+              }
+          }
+        }
+
+        /* Old method
         for(int i = 0; i < foodList.size(); i++)
         {
             if(ocrText.toLowerCase().contains(foodList.get(i).getName().toLowerCase()))
@@ -258,7 +280,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                     }
                 }
             }
-        }
+        }*/
         return returnString;
     }
 
@@ -283,16 +305,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
 
         return tagList;
-    }
-
-    //idk what this is for anymore, I think it won't be used.
-    public String makeTagListString(String [] tagList) {
-        String tags = "";
-        for(int i = 0; i < tagList.length; i++)
-            tags += tagList[i];
-
-
-    return tags;
     }
 
 
