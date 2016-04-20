@@ -16,8 +16,8 @@
         android:id="@+id/artificial_sweetener_enabled"
         android:checked="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -25,9 +25,9 @@
         android:text="Carcinogens"
         android:id="@+id/carcinogenic_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/artificial_sweetener_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_toRightOf="@+id/imageView3"
+        android:layout_toEndOf="@+id/imageView3" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -35,9 +35,9 @@
         android:text="Dairy"
         android:id="@+id/dairy_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/carcinogenic_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -45,9 +45,9 @@
         android:text="Eggs"
         android:id="@+id/egg_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/dairy_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -55,9 +55,9 @@
         android:text="Fish"
         android:id="@+id/fish_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/egg_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -65,9 +65,9 @@
         android:text="Meat"
         android:id="@+id/meat_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/fish_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -75,9 +75,9 @@
         android:text="Peanuts"
         android:id="@+id/peanut_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/meat_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -85,9 +85,9 @@
         android:text="Sesame"
         android:id="@+id/sesame_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/peanut_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -95,19 +95,9 @@
         android:text="Shellfish"
         android:id="@+id/shellfish_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/sesame_enabled"
-        android:layout_alignParentLeft="true" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Soy"
-        android:id="@+id/soy_enabled"
-        android:checked="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/shellfish_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -115,9 +105,9 @@
         android:text="Sweetener"
         android:id="@+id/sweetener_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/soy_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -125,9 +115,9 @@
         android:text="Trans Fat"
         android:id="@+id/trans_fat_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/sweetener_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -136,7 +126,8 @@
         android:id="@+id/tree_nut_enabled"
         android:checked="true"
         android:layout_below="@+id/trans_fat_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -144,9 +135,9 @@
         android:text="Wheat"
         android:id="@+id/wheat_enabled"
         android:checked="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/tree_nut_enabled"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="31dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -156,5 +147,179 @@
         android:layout_below="@+id/peanut_enabled"
         android:layout_toRightOf="@+id/artificial_sweetener_enabled"
         android:layout_toEndOf="@+id/artificial_sweetener_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/sweetener"
+        android:layout_above="@+id/carcinogenic_enabled"
+        android:layout_toLeftOf="@+id/soy_enabled"
+        android:layout_toStartOf="@+id/soy_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:src="@drawable/carcinogens"
+        android:layout_below="@+id/artificial_sweetener_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/carcinogenic_enabled"
+        android:layout_toLeftOf="@+id/artificial_sweetener_enabled"
+        android:layout_toStartOf="@+id/artificial_sweetener_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:src="@drawable/milk"
+        android:layout_below="@+id/carcinogenic_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/dairy_enabled"
+        android:layout_toLeftOf="@+id/carcinogenic_enabled"
+        android:layout_toStartOf="@+id/carcinogenic_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:src="@drawable/eggs"
+        android:layout_below="@+id/dairy_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/egg_enabled"
+        android:layout_toLeftOf="@+id/carcinogenic_enabled"
+        android:layout_toStartOf="@+id/carcinogenic_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6"
+        android:src="@drawable/fish"
+        android:layout_above="@+id/meat_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/fish_enabled"
+        android:layout_alignRight="@+id/imageView5"
+        android:layout_alignEnd="@+id/imageView5" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView7"
+        android:src="@drawable/meat"
+        android:layout_above="@+id/peanut_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/meat_enabled"
+        android:layout_toLeftOf="@+id/soy_enabled"
+        android:layout_toStartOf="@+id/soy_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView8"
+        android:src="@drawable/peanuts"
+        android:layout_below="@+id/meat_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/peanut_enabled"
+        android:layout_toLeftOf="@+id/soy_enabled"
+        android:layout_toStartOf="@+id/soy_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView9"
+        android:src="@drawable/sesame"
+        android:layout_alignTop="@+id/sesame_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/shellfish_enabled"
+        android:layout_toLeftOf="@+id/soy_enabled"
+        android:layout_toStartOf="@+id/soy_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView10"
+        android:src="@drawable/shellfish"
+        android:layout_below="@+id/sesame_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/soy_enabled"
+        android:layout_above="@+id/soy_enabled"
+        android:layout_toLeftOf="@+id/soy_enabled" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView11"
+        android:src="@drawable/sweetener"
+        android:layout_below="@+id/soy_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/sweetener_enabled"
+        android:layout_alignRight="@+id/imageView15"
+        android:layout_alignEnd="@+id/imageView15" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView12"
+        android:src="@drawable/trans_fat"
+        android:layout_alignBottom="@+id/trans_fat_enabled"
+        android:layout_alignRight="@+id/imageView13"
+        android:layout_alignEnd="@+id/imageView13"
+        android:layout_below="@+id/sweetener_enabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView13"
+        android:src="@drawable/tree_nuts"
+        android:layout_below="@+id/imageView12"
+        android:layout_alignBottom="@+id/tree_nut_enabled"
+        android:layout_alignRight="@+id/imageView14"
+        android:layout_alignEnd="@+id/imageView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView14"
+        android:src="@drawable/wheat"
+        android:layout_below="@+id/imageView13"
+        android:layout_alignBottom="@+id/wheat_enabled"
+        android:layout_alignRight="@+id/imageView15"
+        android:layout_alignEnd="@+id/imageView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soy"
+        android:id="@+id/soy_enabled"
+        android:checked="true"
+        android:layout_below="@+id/shellfish_enabled"
+        android:layout_alignLeft="@+id/shellfish_enabled"/>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView15"
+        android:src="@drawable/soy"
+        android:layout_below="@+id/shellfish_enabled"
+        android:layout_toStartOf="@+id/soy_enabled"
+        android:layout_alignBottom="@+id/soy_enabled"
+        android:layout_toLeftOf="@+id/soy_enabled" />
+
 
 </RelativeLayout>
