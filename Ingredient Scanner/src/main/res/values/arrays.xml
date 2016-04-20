@@ -19,6 +19,9 @@
 		<item>Continuous</item>
 		<item>Single shot</item>
 	</string-array>
+	<string-array name ="allergens">
+		<item>Artificial Sweetener</item>
+	</string-array>
 
     <string-array name="pagesegmentationmodes">
         <item>Auto</item>

@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     Button cameraActivityButton;
     Button settingsActivityButton;
     Button resultsActivityButton;
+    Button allergyPreferencesActivityButton;
+
     ImageButton helpActivityButton;
 
 
@@ -49,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i); //sends us to results test!
             }
         });
+
+        allergyPreferencesActivityButton = (Button)findViewById(R.id.allergen_button_main);
+        allergyPreferencesActivityButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AllergenPreferencesActivity.class);
+                startActivity(i); //sends us to results test!
+            }
+        });
+
+
         helpActivityButton = (ImageButton)findViewById(R.id.help_button);
         helpActivityButton.setOnClickListener(new View.OnClickListener(){
             @Override

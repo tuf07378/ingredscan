@@ -52,8 +52,9 @@
         android:layout_height="wrap_content"
         android:text="Results Test"
         android:id="@+id/results_button_test"
-        android:layout_below="@+id/capture_activity_button"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/capture_activity_button"
+        android:layout_alignEnd="@+id/capture_activity_button" />
 
     <ImageButton
         style="?android:attr/buttonStyleSmall"
@@ -64,5 +65,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:src="@drawable/help_button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Allergen Settings"
+        android:id="@+id/allergen_button_main"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/capture_activity_button"
+        android:layout_toEndOf="@+id/capture_activity_button" />
 
 </RelativeLayout>
