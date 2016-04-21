@@ -85,7 +85,7 @@ import edu.sfsu.cs.orange.ocr.language.TranslateAsyncTask;
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback,
         ShutterButton.OnShutterButtonListener {
 
-  Button resultsActivityButton;
+  private Button resultsActivityButton;
 
   private static final String TAG = CaptureActivity.class.getSimpleName();
 
@@ -134,7 +134,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   /**
    * Whether to initially show a looping, real-time OCR display.
    */
-  public static final boolean DEFAULT_TOGGLE_CONTINUOUS = false;
+  public static final boolean DEFAULT_TOGGLE_CONTINUOUS = true;
 
   /**
    * Whether to initially reverse the image returned by the camera.
@@ -144,7 +144,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   /**
    * Whether to enable the use of online translation services be default.
    */
-  public static final boolean DEFAULT_TOGGLE_TRANSLATION = true;
+  public static final boolean DEFAULT_TOGGLE_TRANSLATION = false;
 
   /**
    * Whether the light should be initially activated by default.
@@ -273,10 +273,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     super.onCreate(icicle);
 
     checkFirstLaunch();
-
+    /*
     if (isFirstLaunch) {
       setDefaultPreferences();
-    }
+    }*/
 
     Window window = getWindow();
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -295,6 +295,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         startActivity(i); //sends us to results page!
       }
     });
+    resultsActivityButton.setVisibility(View.GONE);
+
     viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
     cameraButtonView = findViewById(R.id.camera_button_view);
     resultView = findViewById(R.id.result_view);
@@ -416,7 +418,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   protected void onResume() {
     super.onResume();
     resetStatusView();
-
     String previousSourceLanguageCodeOcr = sourceLanguageCodeOcr;
     int previousOcrEngineMode = ocrEngineMode;
 
@@ -899,6 +900,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       progressView.setVisibility(View.GONE);
       setProgressBarVisibility(false);
     }
+    resultsActivityButton.setVisibility(View.VISIBLE);
     return true;
   }
 
