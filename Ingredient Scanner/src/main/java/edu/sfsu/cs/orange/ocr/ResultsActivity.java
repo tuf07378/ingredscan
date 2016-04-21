@@ -1,7 +1,9 @@
 package edu.sfsu.cs.orange.ocr;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
@@ -77,35 +79,36 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public String[] allergenArray() {
-        AllergenPreferences ap = (AllergenPreferences) getApplication();
+        final SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+
         String allergenList = "";
-        if (ap.isArtificial_sweetener_enabled())
+        if (prefs.getBoolean("allergen_checkbox_1", true))
             allergenList += "Artificial Sweetener,";
-        if (ap.isCarcinogenic_enabled())
+        if (prefs.getBoolean("allergen_checkbox_2", true))
             allergenList += "Carcinogenic,";
-        if (ap.isDairy_enabled())
+        if (prefs.getBoolean("allergen_checkbox_3", true))
             allergenList += "Dairy,";
-        if (ap.isEgg_enabled())
+        if (prefs.getBoolean("allergen_checkbox_4", true))
             allergenList += "Egg,";
-        if (ap.isFish_enabled())
+        if (prefs.getBoolean("allergen_checkbox_5", true))
             allergenList += "Fish,";
-        if (ap.isMeat_enabled())
+        if (prefs.getBoolean("allergen_checkbox_6", true))
             allergenList += "Meat,";
-        if (ap.isPeanut_enabled())
+        if (prefs.getBoolean("allergen_checkbox_7", true))
             allergenList += "Peanut,";
-        if (ap.isSesame_enabled())
+        if (prefs.getBoolean("allergen_checkbox_8", true))
             allergenList += "Sesame,";
-        if (ap.isShellfish_enabled())
+        if (prefs.getBoolean("allergen_checkbox_9", true))
             allergenList += "Shellfish,";
-        if (ap.isSoy_enabled())
+        if (prefs.getBoolean("allergen_checkbox_10", true))
             allergenList += "Soy,";
-        if (ap.isSweetener_enabled())
+        if (prefs.getBoolean("allergen_checkbox_11", true))
             allergenList += "Sweetener,";
-        if (ap.isTrans_fat_enabled())
+        if (prefs.getBoolean("allergen_checkbox_12", true))
             allergenList += "Trans Fat,";
-        if (ap.isTree_nut_enabled())
+        if (prefs.getBoolean("allergen_checkbox_13", true))
             allergenList += "Tree Nut,";
-        if (ap.isWheat_enabled())
+        if (prefs.getBoolean("allergen_checkbox_14", true))
             allergenList += "Wheat,";
 
         return stringtoArray(allergenList);

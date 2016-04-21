@@ -5,6 +5,9 @@ import android.app.Application;
 /**
  * Created by Vlad on 4/19/2016.
  */
+
+
+//This class is no longer used, due to the switch to SharedPreferences from this Global class.
 public class AllergenPreferences extends Application {
 
     private boolean artificial_sweetener_enabled, carcinogenic_enabled, dairy_enabled, egg_enabled,
