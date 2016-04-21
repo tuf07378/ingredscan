@@ -75,7 +75,7 @@ public class ResultsActivity extends AppCompatActivity {
         //Puts the main ingredient allergen results in the resultsView, and lists the ingredients not found
         resultsView.setText(mainResultsInfo);
         ingredientsNotFoundView.setText(ingredientsNotFound);
-        myDbHelper.close();
+        myDbHelper.close(); //where I fixed the sql error :)<3333
 
     }
 
