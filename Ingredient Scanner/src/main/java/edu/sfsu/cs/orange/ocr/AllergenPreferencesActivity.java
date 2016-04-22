@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 
 public class AllergenPreferencesActivity extends AppCompatActivity {
@@ -24,8 +25,6 @@ public class AllergenPreferencesActivity extends AppCompatActivity {
     private CheckBox allergen_checkbox_12;
     private CheckBox allergen_checkbox_13;
     private CheckBox allergen_checkbox_14;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +56,7 @@ public class AllergenPreferencesActivity extends AppCompatActivity {
         allergen_checkbox_13 = (CheckBox)findViewById(R.id.tree_nut_enabled);
         allergen_checkbox_14 = (CheckBox)findViewById(R.id.wheat_enabled);
         allergen_checkbox_1.setChecked(prefs.getBoolean("allergen_checkbox_1", true));  //the second parameter is the default string to use if the variable isn't found!)
+
         allergen_checkbox_2.setChecked(prefs.getBoolean("allergen_checkbox_2", true));
         allergen_checkbox_3.setChecked(prefs.getBoolean("allergen_checkbox_3", true));
         allergen_checkbox_4.setChecked(prefs.getBoolean("allergen_checkbox_4", true));
@@ -71,148 +71,115 @@ public class AllergenPreferencesActivity extends AppCompatActivity {
         allergen_checkbox_13.setChecked(prefs.getBoolean("allergen_checkbox_13", true));
         allergen_checkbox_14.setChecked(prefs.getBoolean("allergen_checkbox_14", true));
 
-        allergen_checkbox_1.setOnClickListener(new View.OnClickListener() {
+
+
+        allergen_checkbox_1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_1", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_1", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_1", isChecked).commit();
             }
         });
 
-        allergen_checkbox_2.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_2", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_2", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_2", isChecked).commit();
             }
         });
-        allergen_checkbox_3.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_3", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_3", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_3", isChecked).commit();
             }
         });
-        allergen_checkbox_4.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_4", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_4", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_3", isChecked).commit();
             }
         });
-        allergen_checkbox_5.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_5", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_5", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_4", isChecked).commit();
             }
         });
-        allergen_checkbox_6.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_6", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_6", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_5", isChecked).commit();
             }
         });
-        allergen_checkbox_7.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_7", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_7", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_6", isChecked).commit();
             }
         });
-        allergen_checkbox_8.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_7.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_8", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_8", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_7", isChecked).commit();
             }
         });
-        allergen_checkbox_9.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_8.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_9", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_9", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_8", isChecked).commit();
             }
         });
-        allergen_checkbox_10.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_9.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_10", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_10", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_9", isChecked).commit();
             }
         });
-        allergen_checkbox_11.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_10.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_11", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_11", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_10", isChecked).commit();
             }
         });
-        allergen_checkbox_12.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_11.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_12", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_12", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_11", isChecked).commit();
             }
         });
-        allergen_checkbox_13.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_12.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_13", true).apply();
-                }else{
-                    prefs.edit().putBoolean("allergen_checkbox_13", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_12", isChecked).commit();
             }
         });
-        allergen_checkbox_14.setOnClickListener(new View.OnClickListener() {
+        allergen_checkbox_13.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                if(allergen_checkbox_1.isChecked()){
-                    prefs.edit().putBoolean("allergen_checkbox_14", true).apply();
-                }else{
-                    System.out.println("wheat checked");
-                    prefs.edit().putBoolean("allergen_checkbox_14", false).apply();
-                }
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_13", isChecked).commit();
             }
         });
+        allergen_checkbox_14.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                prefs.edit().putBoolean("allergen_checkbox_14", isChecked).commit();
+            }
+        });
+
     }
 
 }

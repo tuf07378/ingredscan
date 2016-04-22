@@ -292,6 +292,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       public void onClick(View v) {
         Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
         i.putExtra("ocrText", ocrText);
+        resultsActivityButton.setVisibility(View.GONE);
         startActivity(i); //sends us to results page!
       }
     });
