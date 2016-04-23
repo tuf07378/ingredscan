@@ -203,6 +203,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String[] stringtoArray(String s)
     {
         String replacedStr = s.replaceAll("\n", " ");
+        replacedStr = replacedStr.replaceAll(".",","); //replaces all periods with commas.
         replacedStr = replacedStr.replaceAll("     ", " ");  //sets 5 spaces to 1 space :>
         replacedStr = replacedStr.replaceAll("    ", " ");  //sets 4 spaces to 1 space
         replacedStr = replacedStr.replaceAll("   ", " ");  //sets 3 spaces to 1 space
