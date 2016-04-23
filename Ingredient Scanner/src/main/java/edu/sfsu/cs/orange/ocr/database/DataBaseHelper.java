@@ -203,9 +203,11 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String[] stringtoArray(String s)
     {
         String replacedStr = s.replaceAll("\n", " ");
-        replacedStr = s.replaceAll("    ", " ");
-        replacedStr = s.replaceAll("   ", " ");
-        replacedStr = s.replaceAll("  ", " ");
+        replacedStr = replacedStr.replaceAll("     ", " ");  //sets 5 spaces to 1 space
+        replacedStr = replacedStr.replaceAll("    ", " ");  //sets 4 spaces to 1 space
+        replacedStr = replacedStr.replaceAll("   ", " ");  //sets 3 spaces to 1 space
+        replacedStr = replacedStr.replaceAll("  ", " ");   //sets 2 spaces to 1 space
+
 
         String[] returnString = replacedStr.split(",");
         for(int i = 0; i < returnString.length; i++)
