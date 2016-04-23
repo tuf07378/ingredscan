@@ -6,11 +6,7 @@ import android.database.SQLException;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Activity;
-import android.graphics.Color;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -69,7 +65,9 @@ public class ResultsActivity extends AppCompatActivity {
             }
             String[] allergens = allergenArray();
             String mainResultsInfo = myDbHelper.resultsInfo(ocrText, allergens);
-            String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText);
+
+            String ingredientsNotFound = myDbHelper.getIngredientsNotFound();
+            //String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText); // Old method of getting the list.
             resultsView.setText("OCR Text: " + ocrText + "\n\nResult: " + mainResultsInfo + "\n" + ingredientsNotFound);
             myDbHelper.close(); //where I fixed the sql error :)<3333
         }

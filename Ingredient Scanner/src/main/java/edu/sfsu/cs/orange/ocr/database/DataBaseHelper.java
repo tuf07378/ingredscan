@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.PreparedStatement;
+import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +30,12 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     private final Context myContext;
 
+    public String getIngredientsNotFound() {
+        return ingredientsNotFound;
+    }
+
+    private String ingredientsNotFound;
+
     /**
      * Constructor
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
@@ -39,6 +45,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         super(context, DB_NAME, null, 1);
         this.myContext = context;
+        String ingredientsNotFound = "";
     }
 
     /**
@@ -218,18 +225,19 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //Takes the OCR input, compares it with our foodList, and returns a String array of ingredients found.
     public String foodFoundList(String ocrText)
     {
-        String foodNotFoundList = "Ingredients found: ";
+        String foodFoundList = "Ingredients found: ";
         String [] ocrArray;
         ocrArray = stringtoArray(ocrText);
         String foodList = makefoodListString();
         for(int i = 0; i < ocrArray.length; i++)
         {
             if((foodList.toLowerCase().contains(ocrArray[i].toLowerCase())))
-                foodNotFoundList += ocrArray[i] + ", ";
-        }
-        return foodNotFoundList;
+                foodFoundList += ocrArray[i] + ", ";
+            }
+        return foodFoundList;
     }
 
+    //OBSOLETE METHOD!
     //Takes the OCR input, compares it with our foodList, and returns a list of ingredients not found
     public String foodNotFoundList(String ocrText){
       String foodNotFoundList = "Ingredients not found: ";
@@ -249,40 +257,32 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //This method will give us our results info: Each ingredient and the allergens it contains, based on the user's input.
     public String resultsInfo(String ocrText, String[] allergens)
     {
+        ingredientsNotFound = "Ingredients not found: ";
         String returnString = "";
         String[] ocrTextArray = stringtoArray(ocrText);
         List<Food> foodList;
         foodList = getListFood();    //gets the database into a list of Food items.
-
-        for(int i = 0; i <ocrTextArray.length; i++)
-        {
-          for(int j = 0; j < foodList.size(); j++)
-          {
-              if(ocrTextArray[i].toLowerCase().contains( foodList.get(j).getName().toLowerCase()))
-              {
-                  if(allergyCheck(allergens, foodList.get(j).getTags())) {
-                      returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + "\n";
-                      break;
-                  }
-              }
-          }
-        }
-
-        /* Old method
-        for(int i = 0; i < foodList.size(); i++)
-        {
-            if(ocrText.toLowerCase().contains(foodList.get(i).getName().toLowerCase()))
-            {
-                for(int j = 0; j < allergens.length; j++)
-                {
-                    if(foodList.get(i).getTags().toLowerCase().contains(allergens[j].toLowerCase()))
-                    {
-                        returnString += foodList.get(i).getName() + " contains " + foodList.get(i).getTags() + "\n";
-                        break; //breaks out of the allergens for loop.
+        boolean found = false;
+        for(int i = 0; i <ocrTextArray.length; i++) {
+            for (int j = 0; j < foodList.size(); j++) {
+                if (ocrTextArray[i].toLowerCase().contains(foodList.get(j).getName().toLowerCase())) {
+                    if (allergyCheck(allergens, foodList.get(j).getTags())) {
+                        returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() +" (matched with " +foodList.get(j).getName() + ")\n";
+                        found = true;
+                        break;
+                    }
+                } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.85) {
+                    if (allergyCheck(allergens, foodList.get(j).getTags())) {
+                        returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() +  " (matched with " +foodList.get(j).getName() + ")\n";
+                        found = true;
+                        break;
                     }
                 }
-            }
-        }*/
+
+            }if(!found)
+                ingredientsNotFound += ocrTextArray[i] + ", ";
+            found = false;
+        }
         return returnString;
     }
 

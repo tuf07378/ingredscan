@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-
 public class AllergenPreferencesActivity extends AppCompatActivity {
 
     private CheckBox allergen_checkbox_1;
