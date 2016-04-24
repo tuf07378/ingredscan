@@ -66,8 +66,8 @@ public class ResultsActivity extends AppCompatActivity {
             String[] allergens = allergenArray();
             String mainResultsInfo = myDbHelper.resultsInfo(ocrText, allergens);
 
-            String ingredientsNotFound = myDbHelper.getIngredientsNotFound();
-            //String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText); // Old method of getting the list.
+            //String ingredientsNotFound = myDbHelper.getIngredientsNotFound();
+            String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText); // Old method of getting the list.
             resultsView.setText("OCR Text: " + ocrText + "\n\nResult: " + mainResultsInfo + "\n" + ingredientsNotFound);
             myDbHelper.close(); //where I fixed the sql error :)<3333
         }

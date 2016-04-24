@@ -6,11 +6,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import org.apache.commons.lang3.StringUtils;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +33,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     private final Context myContext;
 
-    public String getIngredientsNotFound() {
-        return ingredientsNotFound;
-    }
-
-    private String ingredientsNotFound;
-
     /**
      * Constructor
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
@@ -45,7 +42,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         super(context, DB_NAME, null, 1);
         this.myContext = context;
-        String ingredientsNotFound = "";
     }
 
     /**
@@ -187,7 +183,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return foodList;
     }
 
-      //Makes a string list of all the food items from our Database, separated by ", " (comma and space)
+    //Makes a string list of all the food items from our Database, separated by ", " (comma and space)
     public String makefoodListString() {
 
         List<Food> foodList;
@@ -203,13 +199,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String[] stringtoArray(String s)
     {
         String replacedStr = s.replaceAll("\n", " ");
-        replacedStr = replacedStr.replaceAll(".",","); //replaces all periods with commas.
-        replacedStr = replacedStr.replaceAll("     ", " ");  //sets 5 spaces to 1 space :>
-        replacedStr = replacedStr.replaceAll("    ", " ");  //sets 4 spaces to 1 space
-        replacedStr = replacedStr.replaceAll("   ", " ");  //sets 3 spaces to 1 space
-        replacedStr = replacedStr.replaceAll("  ", " ");   //sets 2 spaces to 1 space
-
-
         String[] returnString = replacedStr.split(",");
         for(int i = 0; i < returnString.length; i++)
         {
@@ -223,8 +212,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //Method to convert an array of Strings back to an ingredients list String separated by ", "( comma and space).
     public String arrayToString(String[] s)
     {
-       String returnString = "";
-       for(int i = 0; i < s.length; i++)
+        String returnString = "";
+        for(int i = 0; i < s.length; i++)
             returnString += s[i] + ", ";
         return returnString;
     }
@@ -232,31 +221,46 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //Takes the OCR input, compares it with our foodList, and returns a String array of ingredients found.
     public String foodFoundList(String ocrText)
     {
-        String foodFoundList = "Ingredients found: ";
+        String foodNotFoundList = "Ingredients found: ";
         String [] ocrArray;
         ocrArray = stringtoArray(ocrText);
         String foodList = makefoodListString();
         for(int i = 0; i < ocrArray.length; i++)
         {
             if((foodList.toLowerCase().contains(ocrArray[i].toLowerCase())))
-                foodFoundList += ocrArray[i] + ", ";
-            }
-        return foodFoundList;
+                foodNotFoundList += ocrArray[i] + ", ";
+        }
+        return foodNotFoundList;
     }
 
-    //OBSOLETE METHOD!
     //Takes the OCR input, compares it with our foodList, and returns a list of ingredients not found
     public String foodNotFoundList(String ocrText){
-      String foodNotFoundList = "Ingredients not found: ";
-      String [] ocrArray;
-      ocrArray = stringtoArray(ocrText);
-      String foodList = makefoodListString();
-      for(int i = 0; i < ocrArray.length; i++)
-      {
-        if(!(foodList.toLowerCase().contains(ocrArray[i].toLowerCase())))
-            foodNotFoundList += ocrArray[i] + ", ";
-      }
-      return foodNotFoundList;
+
+
+        String foodNotFoundList = "Ingredients not found, or safe:";
+        String[] ocrTextArray = stringtoArray(ocrText);
+        List<Food> foodList;
+        foodList = getListFood();    //gets the database into a list of Food items.
+        boolean word_found = false;
+        for(int i = 0; i <ocrTextArray.length; i++)
+        {
+            word_found = false;
+            for(int j = 0; j < foodList.size(); j++)
+            {
+                if(ocrTextArray[i] != null) {
+                    if (ocrTextArray[i].toLowerCase().contains(foodList.get(j).getName().toLowerCase())) {
+                        word_found = true;
+                    } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.88) {
+                        word_found = true;
+                    }
+                }
+            }
+            if(!word_found)
+                foodNotFoundList += ocrTextArray[i] +", ";
+        }
+        return foodNotFoundList;
+
+
     }
 
 
@@ -264,31 +268,28 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //This method will give us our results info: Each ingredient and the allergens it contains, based on the user's input.
     public String resultsInfo(String ocrText, String[] allergens)
     {
-        ingredientsNotFound = "Ingredients not found: ";
         String returnString = "";
         String[] ocrTextArray = stringtoArray(ocrText);
         List<Food> foodList;
         foodList = getListFood();    //gets the database into a list of Food items.
-        boolean found = false;
-        for(int i = 0; i <ocrTextArray.length; i++) {
-            for (int j = 0; j < foodList.size(); j++) {
+
+        for(int i = 0; i <ocrTextArray.length; i++)
+        {
+            for(int j = 0; j < foodList.size(); j++)
+            {   if(ocrTextArray[i] != null) {
                 if (ocrTextArray[i].toLowerCase().contains(foodList.get(j).getName().toLowerCase())) {
-                    found = true;
                     if (allergyCheck(allergens, foodList.get(j).getTags())) {
-                        returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() +" (matched with " +foodList.get(j).getName() + ")\n";
+                        returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + " (matched with " + foodList.get(j).getName() + ")\n";
                         break;
-                    }
-                } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.85) {
-                    found = true;
-                    if (allergyCheck(allergens, foodList.get(j).getTags())) {
-                        returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() +  " (matched with " +foodList.get(j).getName() + ")\n";
-                        break;
+                    } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.88) {
+                        if (allergyCheck(allergens, foodList.get(j).getTags())) {
+                            returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + " (matched with " + foodList.get(j).getName() + ")\n";
+                            break;
+                        }
                     }
                 }
-
-            }if(!found)
-                ingredientsNotFound += ocrTextArray[i] + ", ";
-            found = false;
+            }
+            }
         }
         return returnString;
     }
@@ -316,8 +317,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         {
             for(int j = 0; j < foodList.size(); j++) {
                 if (foodList.get(j).getName() == ingredient[i]) {
-                        tagList[k] = foodList.get(j).getTags();
-                        k++;
+                    tagList[k] = foodList.get(j).getTags();
+                    k++;
                 }
             }
         }
