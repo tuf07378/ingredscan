@@ -9,19 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.sfsu.cs.orange.ocr.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome to Aia! Aia stands for Am I Allergic? This application scans ingredient lists and determines which ingredients do not constrain to your dietary requirements."
-        android:id="@+id/textView"
-        android:layout_above="@+id/capture_activity_button"
-        android:layout_alignParentStart="true"
-        android:textAlignment="center"
-        android:enabled="true"
-        android:textStyle="normal"
-        android:gravity="center" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -203,6 +203,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String[] stringtoArray(String s)
     {
         String replacedStr = s.replaceAll("\n", " ");
+        replacedStr = replacedStr.replaceAll(".",","); //replaces all periods with commas.
+        replacedStr = replacedStr.replaceAll("     ", " ");  //sets 5 spaces to 1 space :>
+        replacedStr = replacedStr.replaceAll("    ", " ");  //sets 4 spaces to 1 space
+        replacedStr = replacedStr.replaceAll("   ", " ");  //sets 3 spaces to 1 space
+        replacedStr = replacedStr.replaceAll("  ", " ");   //sets 2 spaces to 1 space
+
+
         String[] returnString = replacedStr.split(",");
         for(int i = 0; i < returnString.length; i++)
         {
@@ -266,15 +273,15 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         for(int i = 0; i <ocrTextArray.length; i++) {
             for (int j = 0; j < foodList.size(); j++) {
                 if (ocrTextArray[i].toLowerCase().contains(foodList.get(j).getName().toLowerCase())) {
+                    found = true;
                     if (allergyCheck(allergens, foodList.get(j).getTags())) {
                         returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() +" (matched with " +foodList.get(j).getName() + ")\n";
-                        found = true;
                         break;
                     }
                 } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.85) {
+                    found = true;
                     if (allergyCheck(allergens, foodList.get(j).getTags())) {
                         returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() +  " (matched with " +foodList.get(j).getName() + ")\n";
-                        found = true;
                         break;
                     }
                 }
