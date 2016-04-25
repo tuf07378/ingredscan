@@ -199,11 +199,17 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String[] stringtoArray(String s)
     {
         String replacedStr = s.replaceAll("\n", " ");
+        replacedStr = replacedStr.replaceAll("\\.","\\,");
+        replacedStr = replacedStr.replaceAll("    ", " ");
+        replacedStr = replacedStr.replaceAll("   ", " ");
+        replacedStr = replacedStr.replaceAll("  ", " ");
         String[] returnString = replacedStr.split(",");
         for(int i = 0; i < returnString.length; i++)
         {
-            while(returnString[i].charAt(0) == ' '){
-                returnString[i] = returnString[i].replaceFirst(" ", "");
+            if(returnString[i].length() > 1) {
+                while (returnString[i].charAt(0) == ' ') {
+                    returnString[i] = returnString[i].replaceFirst(" ", "");
+                }
             }
         }
         return returnString;
@@ -236,8 +242,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     //Takes the OCR input, compares it with our foodList, and returns a list of ingredients not found
     public String foodNotFoundList(String ocrText){
 
-
-        String foodNotFoundList = "Ingredients either not found, or are considered safe: ";
+        String foodNotFoundList = "Ingredients not found to have allergens: ";
         String[] ocrTextArray = stringtoArray(ocrText);
         List<Food> foodList;
         foodList = getListFood();    //gets the database into a list of Food items.
@@ -250,7 +255,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 if(ocrTextArray[i] != null) {
                     if (ocrTextArray[i].toLowerCase().contains(foodList.get(j).getName().toLowerCase())) {
                         word_found = true;
-                    } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.88) {
+                    } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.89) {
                         word_found = true;
                     }
                 }
@@ -266,29 +271,28 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     //THE KING METHOD
     //This method will give us our results info: Each ingredient and the allergens it contains, based on the user's input.
-    public String resultsInfo(String ocrText, String[] allergens)
-    {
+    public String resultsInfo(String ocrText, String[] allergens) {
         String returnString = "";
         String[] ocrTextArray = stringtoArray(ocrText);
         List<Food> foodList;
         foodList = getListFood();    //gets the database into a list of Food items.
 
-        for(int i = 0; i <ocrTextArray.length; i++)
-        {
-            for(int j = 0; j < foodList.size(); j++)
-            {   if(ocrTextArray[i] != null) {
-                if (ocrTextArray[i].toLowerCase().contains(foodList.get(j).getName().toLowerCase())) {
-                    if (allergyCheck(allergens, foodList.get(j).getTags())) {
-                        returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + " (matched with " + foodList.get(j).getName() + ")\n";
-                        break;
-                    } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.88) {
+        for (int i = 0; i < ocrTextArray.length; i++) {
+            for (int j = 0; j < foodList.size(); j++) {
+                if (ocrTextArray[i] != null) {
+                    if (ocrTextArray[i].toLowerCase().contains(foodList.get(j).getName().toLowerCase())) {
+                        System.out.println(ocrTextArray[i] + " contains " + foodList.get(j).getName());
+                        if (allergyCheck(allergens, foodList.get(j).getTags())) {
+                            returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + " (matched with " + foodList.get(j).getName() + ")\n";
+                            break;
+                        }
+                    } else if (StringUtils.getJaroWinklerDistance(ocrTextArray[i].toLowerCase(), foodList.get(j).getName().toLowerCase()) >= 0.89) {
                         if (allergyCheck(allergens, foodList.get(j).getTags())) {
                             returnString += ocrTextArray[i] + " contains " + foodList.get(j).getTags() + " (matched with " + foodList.get(j).getName() + ")\n";
                             break;
                         }
                     }
                 }
-            }
             }
         }
         return returnString;

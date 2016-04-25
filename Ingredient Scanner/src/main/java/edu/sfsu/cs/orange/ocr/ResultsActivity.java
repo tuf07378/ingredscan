@@ -50,6 +50,7 @@ public class ResultsActivity extends AppCompatActivity {
     //Main Method that gives us our results and puts them in the TextView.
     public void resultCompute()
     {
+        ocrText = "Sybean oil, Crayfish, Macademia Nut, Molasses, Choccolate, Peanut Buttar, Yoghurt";
         if(ocrText.length() > 0) {
             DataBaseHelper myDbHelper = new DataBaseHelper(this);
             myDbHelper = new DataBaseHelper(this);
@@ -64,10 +65,13 @@ public class ResultsActivity extends AppCompatActivity {
                 throw sqle;
             }
             String[] allergens = allergenArray();
+
             String mainResultsInfo = myDbHelper.resultsInfo(ocrText, allergens);
 
-            //String ingredientsNotFound = myDbHelper.getIngredientsNotFound();
-            String ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText); // Old method of getting the list.
+            String ingredientsNotFound = "";
+            ingredientsNotFound = myDbHelper.foodNotFoundList(ocrText); // Old method of getting the list.
+
+
             resultsView.setText("OCR Text: " + ocrText + "\n\nResult: " + mainResultsInfo + "\n" + ingredientsNotFound);
             myDbHelper.close(); //where I fixed the sql error :)<3333
         }
