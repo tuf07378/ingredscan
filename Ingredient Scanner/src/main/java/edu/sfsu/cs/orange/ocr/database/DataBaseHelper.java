@@ -237,7 +237,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public String foodNotFoundList(String ocrText){
 
 
-        String foodNotFoundList = "Ingredients not found, or safe:";
+        String foodNotFoundList = "Ingredients either not found, or are considered safe: ";
         String[] ocrTextArray = stringtoArray(ocrText);
         List<Food> foodList;
         foodList = getListFood();    //gets the database into a list of Food items.
