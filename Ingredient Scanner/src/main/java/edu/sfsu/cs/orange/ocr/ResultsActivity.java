@@ -50,7 +50,8 @@ public class ResultsActivity extends AppCompatActivity {
     //Main Method that gives us our results and puts them in the TextView.
     public void resultCompute()
     {
-        ocrText = "Sybean oil, Crayfish, Macademia Nut, Molasses, Choccolate, Peanut Buttar, Yoghurt";
+        //Our last hardcoded test.
+        //ocrText = "Sybean oil, Crayfish, Macademia Nut, Molasses, Choccolate, Peanut Buttar, Yoghurt";
         if(ocrText.length() > 0) {
             DataBaseHelper myDbHelper = new DataBaseHelper(this);
             myDbHelper = new DataBaseHelper(this);
